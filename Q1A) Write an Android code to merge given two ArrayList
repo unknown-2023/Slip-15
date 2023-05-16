@@ -1,0 +1,98 @@
+Activity_main.xml
+
+<?xml version="1.0" encoding="utf-8"?>
+<TableLayout xmlns:android="http://schemas.android.com/apk/res/android"
+xmlns:app="http://schemas.android.com/apk/res-auto"
+xmlns:tools="http://schemas.android.com/tools"
+android:layout_width="match_parent"
+android:layout_height="match_parent"
+tools:context=".MainActivity">
+<TableRow >
+<TextView
+android:layout_width="match_parent"
+android:layout_height="100dp"
+android:text="list 1"
+android:textAlignment="center" />
+<EditText
+android:id="@+id/et1"
+android:layout_width="375dp"
+android:layout_height="match_parent"
+android:textAlignment="center" />
+</TableRow>
+<TableRow >
+<TextView
+android:layout_width="100dp"
+android:layout_height="50dp"
+android:text="list 2"
+android:textAlignment="center" />
+
+<EditText
+android:id="@+id/et3"
+android:layout_width="match_parent"
+android:layout_height="100dp"
+android:textAlignment="center" />
+</TableRow>
+<TableRow >
+<TextView
+android:layout_width="100dp"
+android:layout_height="50dp"
+android:text="list 3"
+android:textAlignment="center" />
+<EditText
+android:id="@+id/et2"
+android:layout_width="match_parent"
+android:layout_height="100dp"
+android:textAlignment="center" />
+</TableRow>
+<Button
+android:id="@+id/btn"
+android:layout_height="50dp"
+android:layout_width="20dp"
+android:hint="merge"/>
+</TableLayout>
+----------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+MainActivity.java
+
+package com.example.merge_list;
+import androidx.appcompat.app.AppCompatActivity;
+import android.os.Bundle;
+import android.view.View;
+
+import android.widget.Button;
+import android.widget.EditText;
+import android.widget.RadioGroup;
+import android.widget.Toast;
+import java.util.ArrayList;
+import java.util.Collections;
+import java.util.List;
+public class MainActivity extends AppCompatActivity {
+    EditText et1, et2,et3;
+    Button btn;
+    @Override
+    protected void onCreate(Bundle savedInstanceState) {
+        super.onCreate(savedInstanceState);
+        setContentView(R.layout.activity_main);
+        btn = (Button) findViewById(R.id.btn);
+        btn.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                et1 = (EditText) findViewById(R.id.et1);
+                et2 = (EditText) findViewById(R.id.et2);
+                et3 = (EditText) findViewById(R.id.et3);
+
+                String ss1 = et1.getText().toString();
+                String ss2 = et2.getText().toString();
+                String ss3 = et3.getText().toString();
+                List<String> l1 = new ArrayList<String>(Collections.singleton(ss1));
+                List<String> l2 = new ArrayList<String>(Collections.singleton(ss2));
+                List<String> l3 = new ArrayList<String>(Collections.singleton(ss3));
+                List<String> l = new ArrayList<String>();
+                l1.addAll(l2);
+                l1.addAll(l3);
+
+                Toast.makeText(MainActivity.this, "merge=" + l1.toString(),
+                        Toast.LENGTH_SHORT).show();
+            }
+        });
+    }
+}
